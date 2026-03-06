@@ -1,0 +1,61 @@
+@extends('layouts.main', ['title' => 'Produk'])
+
+@section('title-content')
+    <i class="fas fa-box-open mr-2"></i> Ubah Produk
+@endsection
+
+@section('content')
+<div class="row">
+    <div class="col-xl-4 col-lg-6">
+        <form method="POST" action="{{ route('produk.update', $produk->id) }}" class="card card-orange card-outline">
+            @method('PUT')
+            @csrf
+
+            <div class="card-header">
+                <h3 class="card-title">Ubah Produk</h3>
+            </div>
+            <div class="card-body">
+
+                <div class="form-group">
+                    <label>Kode Produk</label>
+                    <x-input name="kode_produk" type="text" :value="$produk->kode_produk" />
+                </div>
+
+                <div class="form-group">
+                    <label>Nama Produk</label>
+                    <x-input name="nama_produk" type="text" :value="$produk->nama_produk" />
+                </div>
+
+                <div class="form-group">
+                    <label>Harga Produk</label>
+                    <x-input name="harga" type="number" :value="$produk->harga_produk" />
+                </div>
+
+                <div class="form-group">
+    <label for="harga_jual">Harga Jual</label>
+    <input type="number" name="harga_jual" class="form-control" 
+           value="{{ old('harga_jual', $produk->harga_jual) }}">
+</div>
+
+
+                <div class="form-group">
+                    <label>Diskon (%)</label>
+                    <x-input name="diskon" type="number" :value="$produk->diskon" />
+                </div>
+
+                <div class="form-group">
+                    <label>Kategori</label>
+                    <x-select name="kategori_id" :options="$kategoris" :value="$produk->kategori_id" />
+                </div>
+
+
+            </div>
+
+            <div class="card-footer form-inline">
+                <button type="submit" class="btn btn-primary">Update Produk</button>
+                <a href="{{ route('produk.index') }}" class="btn btn-secondary ml-auto">Batal</a>
+            </div>
+        </form>
+    </div>
+</div>
+@endsection
